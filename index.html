@@ -3,142 +3,441 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Portfolio | Web制作</title>
+  <title>Portfolio | Webサイト制作</title>
+  <meta name="description" content="Webサイト制作のポートフォリオ。要件整理からデザイン、実装、公開まで一気通貫で対応します。" />
+
+  <!-- 日本語向け：Noto Sans JP（無料） -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800&display=swap" rel="stylesheet">
+
   <style>
     :root{
-      --bg:#0b0f1a; --card:#111a2e; --text:#e9eefc; --muted:#a8b3d6;
-      --accent:#3b82f6; --line:rgba(255,255,255,.12);
+      --bg:#f7f8fb;
+      --surface:#ffffff;
+      --text:#0f172a;
+      --muted:#475569;
+      --line:rgba(15,23,42,.12);
+      --accent:#2563eb;
+      --accent2:#14b8a6;
+      --shadow:0 12px 28px rgba(15,23,42,.08);
+      --radius:18px;
     }
-    *{box-sizing:border-box}
-    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans JP",sans-serif;background:linear-gradient(180deg,#070a12,#0b0f1a);color:var(--text);}
-    a{color:inherit;text-decoration:none}
-    .wrap{max-width:980px;margin:0 auto;padding:28px 18px 70px}
-    header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 0}
-    .logo{font-weight:800;letter-spacing:.4px}
-    nav{display:flex;gap:14px;flex-wrap:wrap}
-    nav a{color:var(--muted);padding:8px 10px;border-radius:10px}
-    nav a:hover{background:rgba(255,255,255,.06);color:var(--text)}
-    .hero{margin-top:34px;padding:26px;border:1px solid var(--line);border-radius:18px;background:radial-gradient(800px 260px at 10% 10%, rgba(59,130,246,.22), transparent), rgba(255,255,255,.03)}
-    .tag{display:inline-flex;gap:8px;align-items:center;color:var(--muted);font-size:13px;padding:6px 10px;border:1px solid var(--line);border-radius:999px}
-    h1{margin:14px 0 10px;font-size:34px;line-height:1.2}
-    .lead{color:var(--muted);margin:0 0 18px;line-height:1.8}
-    .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
-    .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:12px 14px;border-radius:12px;border:1px solid var(--line)}
-    .btn.primary{background:var(--accent);border-color:transparent;color:white;font-weight:700}
-    .btn.primary:hover{filter:brightness(1.07)}
-    .btn.ghost{background:rgba(255,255,255,.03);color:var(--text)}
-    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px;margin-top:18px}
-    .card{grid-column:span 6;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.03);padding:16px}
-    .card h3{margin:2px 0 8px;font-size:16px}
-    .meta{color:var(--muted);font-size:13px;line-height:1.6}
-    .pill{display:inline-block;margin:10px 6px 0 0;padding:6px 10px;border-radius:999px;border:1px solid var(--line);color:var(--muted);font-size:12px}
-    section{margin-top:34px}
-    .secTitle{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
-    .secTitle h2{margin:0;font-size:18px}
-    .secTitle span{color:var(--muted);font-size:13px}
-    .list{margin:12px 0 0;padding:0;list-style:none;display:grid;gap:10px}
-    .list li{border:1px solid var(--line);border-radius:14px;padding:14px;background:rgba(255,255,255,.02)}
-    footer{margin-top:46px;color:var(--muted);font-size:13px}
-    @media (max-width:720px){ .card{grid-column:span 12} h1{font-size:28px} }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family:"Noto Sans JP", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(900px 380px at 20% -10%, rgba(37,99,235,.12), transparent),
+        radial-gradient(900px 380px at 85% 10%, rgba(20,184,166,.10), transparent),
+        var(--bg);
+      line-height:1.75;
+    }
+
+    a{ color:inherit; text-decoration:none; }
+    .wrap{ max-width:1040px; margin:0 auto; padding:22px 18px 80px; }
+
+    /* header */
+    .header{
+      position:sticky; top:0; z-index:20;
+      backdrop-filter:saturate(1.2) blur(10px);
+      background:rgba(247,248,251,.72);
+      border-bottom:1px solid rgba(15,23,42,.08);
+    }
+    .headerInner{
+      max-width:1040px; margin:0 auto;
+      display:flex; align-items:center; justify-content:space-between;
+      padding:10px 18px;
+      gap:12px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      font-weight:800; letter-spacing:.2px;
+    }
+    .dot{
+      width:12px;height:12px;border-radius:999px;
+      background:linear-gradient(135deg,var(--accent),var(--accent2));
+      box-shadow:0 6px 18px rgba(37,99,235,.25);
+    }
+    nav{ display:flex; gap:6px; flex-wrap:wrap; }
+    nav a{
+      color:var(--muted);
+      padding:8px 10px;
+      border-radius:999px;
+      font-size:14px;
+    }
+    nav a:hover{ background:rgba(37,99,235,.08); color:var(--text); }
+    .navCta{
+      margin-left:6px;
+      background:var(--accent);
+      color:#fff !important;
+      font-weight:700;
+      padding:8px 12px;
+      box-shadow:0 10px 18px rgba(37,99,235,.18);
+    }
+    .navCta:hover{ filter:brightness(1.03); }
+
+    /* hero */
+    .hero{
+      margin-top:20px;
+      border:1px solid rgba(15,23,42,.10);
+      background:rgba(255,255,255,.72);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:22px;
+      overflow:hidden;
+      position:relative;
+    }
+    .badge{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:7px 12px;
+      border-radius:999px;
+      border:1px solid rgba(15,23,42,.10);
+      background:#fff;
+      color:var(--muted);
+      font-size:13px;
+    }
+    h1{
+      margin:14px 0 10px;
+      font-size:34px;
+      line-height:1.25;
+      letter-spacing:.1px;
+    }
+    .lead{
+      margin:0;
+      color:var(--muted);
+      max-width:58ch;
+    }
+    .heroGrid{
+      display:grid; grid-template-columns:1.15fr .85fr;
+      gap:14px;
+      margin-top:16px;
+      align-items:stretch;
+    }
+    .heroCard{
+      border:1px solid rgba(15,23,42,.10);
+      border-radius:16px;
+      background:#fff;
+      padding:14px;
+    }
+    .heroCard h3{
+      margin:2px 0 8px;
+      font-size:14px;
+      color:var(--muted);
+      font-weight:700;
+    }
+    .chips{ display:flex; flex-wrap:wrap; gap:8px; }
+    .chip{
+      font-size:12px;
+      color:var(--muted);
+      border:1px solid rgba(15,23,42,.10);
+      background:rgba(37,99,235,.04);
+      padding:6px 10px;
+      border-radius:999px;
+    }
+    .ctaRow{
+      display:flex; gap:10px; flex-wrap:wrap;
+      margin-top:16px;
+    }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:10px;
+      padding:12px 14px;
+      border-radius:14px;
+      border:1px solid rgba(15,23,42,.12);
+      font-weight:700;
+      background:#fff;
+    }
+    .btn.primary{
+      border-color:transparent;
+      background:var(--accent);
+      color:#fff;
+      box-shadow:0 14px 24px rgba(37,99,235,.18);
+    }
+    .btn.primary:hover{ filter:brightness(1.03); }
+    .btn.ghost:hover{ background:rgba(15,23,42,.03); }
+
+    /* sections */
+    section{ margin-top:34px; }
+    .secHead{
+      display:flex; align-items:flex-end; justify-content:space-between;
+      gap:12px; flex-wrap:wrap;
+      margin-bottom:12px;
+    }
+    .secHead h2{ margin:0; font-size:20px; letter-spacing:.1px; }
+    .secHead p{ margin:0; color:var(--muted); font-size:13px; }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(12,1fr);
+      gap:14px;
+    }
+    .card{
+      grid-column:span 6;
+      border:1px solid rgba(15,23,42,.10);
+      background:rgba(255,255,255,.85);
+      border-radius:var(--radius);
+      box-shadow:0 10px 22px rgba(15,23,42,.06);
+      overflow:hidden;
+    }
+    .cardInner{ padding:16px; }
+    .thumb{
+      height:140px;
+      background:
+        linear-gradient(135deg, rgba(37,99,235,.10), rgba(20,184,166,.10)),
+        #ffffff;
+      border-bottom:1px solid rgba(15,23,42,.08);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:rgba(15,23,42,.45);
+      font-weight:700;
+      font-size:13px;
+    }
+    .titleRow{
+      display:flex; align-items:flex-start; justify-content:space-between; gap:10px;
+    }
+    .card h3{ margin:0; font-size:16px; }
+    .pill{
+      font-size:12px;
+      padding:6px 10px;
+      border-radius:999px;
+      background:rgba(20,184,166,.10);
+      border:1px solid rgba(20,184,166,.25);
+      color:#0f766e;
+      white-space:nowrap;
+    }
+    .meta{ margin:8px 0 0; color:var(--muted); font-size:13px; }
+    .tags{ margin-top:10px; display:flex; flex-wrap:wrap; gap:8px; }
+    .tag{
+      font-size:12px; color:var(--muted);
+      border:1px solid rgba(15,23,42,.10);
+      padding:6px 10px;
+      border-radius:999px;
+      background:#fff;
+    }
+
+    .list{
+      margin:0; padding:0;
+      list-style:none;
+      display:grid; gap:10px;
+    }
+    .list li{
+      border:1px solid rgba(15,23,42,.10);
+      background:rgba(255,255,255,.85);
+      border-radius:16px;
+      padding:14px;
+      box-shadow:0 10px 22px rgba(15,23,42,.05);
+    }
+
+    .note{
+      margin-top:10px;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    /* contact */
+    .contactBox{
+      border:1px solid rgba(15,23,42,.10);
+      background:#fff;
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:16px;
+    }
+    .contactRow{
+      display:flex; flex-wrap:wrap; gap:10px; align-items:center;
+      margin-top:10px;
+    }
+    .mail{
+      display:inline-flex; align-items:center; gap:10px;
+      padding:12px 14px;
+      border:1px solid rgba(15,23,42,.12);
+      border-radius:14px;
+      background:rgba(37,99,235,.04);
+      font-weight:700;
+    }
+    .mail small{ font-weight:500; color:var(--muted); }
+    .topBtn{
+      position:fixed;
+      right:16px; bottom:16px;
+      border-radius:999px;
+      border:1px solid rgba(15,23,42,.12);
+      background:#fff;
+      padding:10px 12px;
+      box-shadow:0 12px 26px rgba(15,23,42,.12);
+      font-weight:700;
+      color:var(--muted);
+    }
+    .topBtn:hover{ background:rgba(15,23,42,.03); color:var(--text); }
+
+    footer{
+      margin-top:42px;
+      color:var(--muted);
+      font-size:13px;
+      text-align:center;
+    }
+
+    @media (max-width:840px){
+      h1{ font-size:28px; }
+      .heroGrid{ grid-template-columns:1fr; }
+      .card{ grid-column:span 12; }
+      nav a{ font-size:13px; }
+    }
   </style>
 </head>
-<body>
-  <div class="wrap">
-    <header>
-      <div class="logo">PORTFOLIO</div>
-      <nav>
-        <a href="#works">Works</a>
-        <a href="#service">Service</a>
-        <a href="#flow">Flow</a>
-        <a href="#contact">Contact</a>
-      </nav>
-    </header>
 
-    <div class="hero">
-      <div class="tag">Web制作 / 静的サイト / レスポンシブ</div>
-      <h1>目的から逆算して、<br>“伝わるサイト”を設計・制作します。</h1>
+<body>
+  <div class="header">
+    <div class="headerInner">
+      <div class="brand">
+        <span class="dot" aria-hidden="true"></span>
+        <span>Web制作ポートフォリオ</span>
+      </div>
+      <nav aria-label="メニュー">
+        <a href="#works">実績</a>
+        <a href="#service">対応</a>
+        <a href="#flow">流れ</a>
+        <a href="#contact" class="navCta">無料相談</a>
+      </nav>
+    </div>
+  </div>
+
+  <main class="wrap">
+    <section class="hero" aria-label="トップ">
+      <span class="badge">要件整理 → デザイン → 実装 → 公開まで</span>
+      <h1>日本のユーザーに“伝わる”<br>明るく見やすいWebサイトを制作します。</h1>
       <p class="lead">
-        コーポレート／採用／イベントLPなど。要件整理〜実装まで一気通貫で対応します。<br>
-        まずは目的・納期・ご予算感を伺い、最適な構成をご提案します。
+        コーポレート／採用／イベントLPなど。目的・ターゲットから整理し、スマホでも迷わない導線で制作します。
+        はじめてのご依頼でも進め方を丁寧にご案内します。
       </p>
-      <div class="cta">
+
+      <div class="ctaRow">
         <a class="btn primary" href="#contact">無料で相談する</a>
         <a class="btn ghost" href="#works">実績を見る</a>
       </div>
-    </div>
+
+      <div class="heroGrid">
+        <div class="heroCard">
+          <h3>得意領域</h3>
+          <div class="chips">
+            <span class="chip">情報整理（構成・導線）</span>
+            <span class="chip">レスポンシブ</span>
+            <span class="chip">表示速度</span>
+            <span class="chip">軽量アニメーション</span>
+            <span class="chip">公開サポート</span>
+          </div>
+        </div>
+        <div class="heroCard">
+          <h3>まず聞きたいこと（例）</h3>
+          <div class="chips">
+            <span class="chip">目的（集客/応募/告知）</span>
+            <span class="chip">納期（いつまで）</span>
+            <span class="chip">ページ数（目安）</span>
+            <span class="chip">素材（文章/画像の有無）</span>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <section id="works">
-      <div class="secTitle">
-        <h2>Works</h2>
-        <span>実績（サンプル可）／課題→解決→成果を重視</span>
+      <div class="secHead">
+        <h2>実績（Works）</h2>
+        <p>公開できない案件は「匿名＋一部スクショ」で掲載可能です</p>
       </div>
+
       <div class="grid">
-        <div class="card">
-          <h3>イベント告知LP（例）</h3>
-          <div class="meta">目的：来場促進 / 担当：構成・デザイン・実装 / 期間：1週間</div>
-          <div>
-            <span class="pill">HTML</span><span class="pill">CSS</span><span class="pill">JavaScript</span><span class="pill">レスポンシブ</span>
+        <article class="card">
+          <div class="thumb">スクリーンショットをここに</div>
+          <div class="cardInner">
+            <div class="titleRow">
+              <h3>イベント告知LP（匿名可）</h3>
+              <span class="pill">短納期</span>
+            </div>
+            <p class="meta">目的：来場促進／担当：構成・デザイン・実装／期間：1週間</p>
+            <div class="tags">
+              <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span><span class="tag">レスポンシブ</span>
+            </div>
           </div>
-        </div>
-        <div class="card">
-          <h3>採用サイト（例）</h3>
-          <div class="meta">目的：応募増 / 担当：情報設計・実装 / 期間：2週間</div>
-          <div>
-            <span class="pill">UI設計</span><span class="pill">アクセシビリティ</span><span class="pill">表示速度</span>
+        </article>
+
+        <article class="card">
+          <div class="thumb">スクリーンショットをここに</div>
+          <div class="cardInner">
+            <div class="titleRow">
+              <h3>採用サイト（匿名可）</h3>
+              <span class="pill">導線改善</span>
+            </div>
+            <p class="meta">目的：応募増／担当：情報設計・実装／期間：2週間</p>
+            <div class="tags">
+              <span class="tag">UI設計</span><span class="tag">アクセシビリティ</span><span class="tag">表示速度</span>
+            </div>
           </div>
-        </div>
+        </article>
       </div>
-      <p class="meta" style="margin-top:12px;">
-        ※公開できない案件は、業種・目的のみ匿名＋一部スクショ（ぼかし/トリミング）で掲載可能です。
+
+      <p class="note">
+        ※実績がまだ少ない場合は、架空案件でも「誰の何を解決するか」を明記すると信頼感が出ます。
       </p>
     </section>
 
     <section id="service">
-      <div class="secTitle">
-        <h2>Service</h2>
-        <span>対応範囲</span>
+      <div class="secHead">
+        <h2>対応できること（Service）</h2>
+        <p>丸投げOK／部分対応も可</p>
       </div>
       <ul class="list">
-        <li>要件整理（目的・ターゲット・導線）／サイトマップ・ワイヤー作成</li>
-        <li>デザイン（トーン設計／コンポーネント化）</li>
-        <li>実装（HTML/CSS/JS・レスポンシブ・軽量アニメーション）</li>
-        <li>公開サポート（GitHub Pages / サーバ / ドメイン設定 など）</li>
+        <li><strong>要件整理・構成</strong>：目的整理、サイトマップ、ワイヤー作成</li>
+        <li><strong>デザイン</strong>：トーン設計、コンポーネント化、スマホ最適化</li>
+        <li><strong>実装</strong>：HTML/CSS/JS、レスポンシブ、軽量アニメーション</li>
+        <li><strong>公開・運用</strong>：GitHub Pages、ドメイン設定、更新しやすい構造</li>
       </ul>
     </section>
 
     <section id="flow">
-      <div class="secTitle">
-        <h2>Flow</h2>
-        <span>制作の流れ</span>
+      <div class="secHead">
+        <h2>制作の流れ（Flow）</h2>
+        <p>はじめてでも迷わない進行</p>
       </div>
       <ul class="list">
-        <li>① 無料相談：目的・納期・ご予算感をヒアリング</li>
-        <li>② 構成提案：サイトマップ／ワイヤーで方向性を確定</li>
-        <li>③ 制作：デザイン→実装（途中確認あり）</li>
-        <li>④ 公開：公開作業＋運用方法の共有</li>
+        <li><strong>① 無料相談</strong>：目的・納期・ご予算感をヒアリング</li>
+        <li><strong>② 構成提案</strong>：サイトマップ／ワイヤーで方向性を確定</li>
+        <li><strong>③ 制作</strong>：デザイン → 実装（途中確認あり）</li>
+        <li><strong>④ 公開</strong>：公開作業＋運用方法を共有</li>
       </ul>
     </section>
 
     <section id="contact">
-      <div class="secTitle">
-        <h2>Contact</h2>
-        <span>お問い合わせ</span>
+      <div class="secHead">
+        <h2>お問い合わせ（Contact）</h2>
+        <p>相談は無料です</p>
       </div>
-      <div class="card" style="grid-column:span 12">
-        <p class="meta" style="margin:0 0 10px;">
-          相談は無料です。目的・納期・ページ数の目安が分かるとスムーズです。
+
+      <div class="contactBox">
+        <p class="meta" style="margin:0">
+          目的・納期・ページ数が分かるとスムーズです。<br>
+          （ここは後で <strong>Googleフォーム埋め込み</strong> に差し替え可能）
         </p>
-        <p style="margin:0">
-          連絡先：<a href="mailto:yourname@example.com" style="color:white;text-decoration:underline;">yourname@example.com</a>
-        </p>
-        <p class="meta" style="margin:10px 0 0;">※ここは後でGoogleフォーム埋め込みに差し替えできます。</p>
+
+        <div class="contactRow">
+          <!-- ↓ここを自分のメールに変更 -->
+          <a class="mail" href="mailto:yourname@example.com">
+            <span>✉︎ yourname@example.com</span>
+            <small>クリックでメール作成</small>
+          </a>
+          <a class="btn ghost" href="#works">実績を見る</a>
+        </div>
       </div>
     </section>
 
     <footer>
       © <span id="y"></span> Portfolio
     </footer>
-  </div>
+  </main>
+
+  <a class="topBtn" href="#top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">↑</a>
 
   <script>
     document.getElementById("y").textContent = new Date().getFullYear();
