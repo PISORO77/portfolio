@@ -3,10 +3,145 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Portfolio</title>
+  <title>Portfolio | Web制作</title>
+  <style>
+    :root{
+      --bg:#0b0f1a; --card:#111a2e; --text:#e9eefc; --muted:#a8b3d6;
+      --accent:#3b82f6; --line:rgba(255,255,255,.12);
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans JP",sans-serif;background:linear-gradient(180deg,#070a12,#0b0f1a);color:var(--text);}
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:980px;margin:0 auto;padding:28px 18px 70px}
+    header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 0}
+    .logo{font-weight:800;letter-spacing:.4px}
+    nav{display:flex;gap:14px;flex-wrap:wrap}
+    nav a{color:var(--muted);padding:8px 10px;border-radius:10px}
+    nav a:hover{background:rgba(255,255,255,.06);color:var(--text)}
+    .hero{margin-top:34px;padding:26px;border:1px solid var(--line);border-radius:18px;background:radial-gradient(800px 260px at 10% 10%, rgba(59,130,246,.22), transparent), rgba(255,255,255,.03)}
+    .tag{display:inline-flex;gap:8px;align-items:center;color:var(--muted);font-size:13px;padding:6px 10px;border:1px solid var(--line);border-radius:999px}
+    h1{margin:14px 0 10px;font-size:34px;line-height:1.2}
+    .lead{color:var(--muted);margin:0 0 18px;line-height:1.8}
+    .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:12px 14px;border-radius:12px;border:1px solid var(--line)}
+    .btn.primary{background:var(--accent);border-color:transparent;color:white;font-weight:700}
+    .btn.primary:hover{filter:brightness(1.07)}
+    .btn.ghost{background:rgba(255,255,255,.03);color:var(--text)}
+    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px;margin-top:18px}
+    .card{grid-column:span 6;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.03);padding:16px}
+    .card h3{margin:2px 0 8px;font-size:16px}
+    .meta{color:var(--muted);font-size:13px;line-height:1.6}
+    .pill{display:inline-block;margin:10px 6px 0 0;padding:6px 10px;border-radius:999px;border:1px solid var(--line);color:var(--muted);font-size:12px}
+    section{margin-top:34px}
+    .secTitle{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+    .secTitle h2{margin:0;font-size:18px}
+    .secTitle span{color:var(--muted);font-size:13px}
+    .list{margin:12px 0 0;padding:0;list-style:none;display:grid;gap:10px}
+    .list li{border:1px solid var(--line);border-radius:14px;padding:14px;background:rgba(255,255,255,.02)}
+    footer{margin-top:46px;color:var(--muted);font-size:13px}
+    @media (max-width:720px){ .card{grid-column:span 12} h1{font-size:28px} }
+  </style>
 </head>
 <body>
-  <h1>ポートフォリオ</h1>
-  <p>GitHub Pages 公開テスト</p>
+  <div class="wrap">
+    <header>
+      <div class="logo">PORTFOLIO</div>
+      <nav>
+        <a href="#works">Works</a>
+        <a href="#service">Service</a>
+        <a href="#flow">Flow</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <div class="hero">
+      <div class="tag">Web制作 / 静的サイト / レスポンシブ</div>
+      <h1>目的から逆算して、<br>“伝わるサイト”を設計・制作します。</h1>
+      <p class="lead">
+        コーポレート／採用／イベントLPなど。要件整理〜実装まで一気通貫で対応します。<br>
+        まずは目的・納期・ご予算感を伺い、最適な構成をご提案します。
+      </p>
+      <div class="cta">
+        <a class="btn primary" href="#contact">無料で相談する</a>
+        <a class="btn ghost" href="#works">実績を見る</a>
+      </div>
+    </div>
+
+    <section id="works">
+      <div class="secTitle">
+        <h2>Works</h2>
+        <span>実績（サンプル可）／課題→解決→成果を重視</span>
+      </div>
+      <div class="grid">
+        <div class="card">
+          <h3>イベント告知LP（例）</h3>
+          <div class="meta">目的：来場促進 / 担当：構成・デザイン・実装 / 期間：1週間</div>
+          <div>
+            <span class="pill">HTML</span><span class="pill">CSS</span><span class="pill">JavaScript</span><span class="pill">レスポンシブ</span>
+          </div>
+        </div>
+        <div class="card">
+          <h3>採用サイト（例）</h3>
+          <div class="meta">目的：応募増 / 担当：情報設計・実装 / 期間：2週間</div>
+          <div>
+            <span class="pill">UI設計</span><span class="pill">アクセシビリティ</span><span class="pill">表示速度</span>
+          </div>
+        </div>
+      </div>
+      <p class="meta" style="margin-top:12px;">
+        ※公開できない案件は、業種・目的のみ匿名＋一部スクショ（ぼかし/トリミング）で掲載可能です。
+      </p>
+    </section>
+
+    <section id="service">
+      <div class="secTitle">
+        <h2>Service</h2>
+        <span>対応範囲</span>
+      </div>
+      <ul class="list">
+        <li>要件整理（目的・ターゲット・導線）／サイトマップ・ワイヤー作成</li>
+        <li>デザイン（トーン設計／コンポーネント化）</li>
+        <li>実装（HTML/CSS/JS・レスポンシブ・軽量アニメーション）</li>
+        <li>公開サポート（GitHub Pages / サーバ / ドメイン設定 など）</li>
+      </ul>
+    </section>
+
+    <section id="flow">
+      <div class="secTitle">
+        <h2>Flow</h2>
+        <span>制作の流れ</span>
+      </div>
+      <ul class="list">
+        <li>① 無料相談：目的・納期・ご予算感をヒアリング</li>
+        <li>② 構成提案：サイトマップ／ワイヤーで方向性を確定</li>
+        <li>③ 制作：デザイン→実装（途中確認あり）</li>
+        <li>④ 公開：公開作業＋運用方法の共有</li>
+      </ul>
+    </section>
+
+    <section id="contact">
+      <div class="secTitle">
+        <h2>Contact</h2>
+        <span>お問い合わせ</span>
+      </div>
+      <div class="card" style="grid-column:span 12">
+        <p class="meta" style="margin:0 0 10px;">
+          相談は無料です。目的・納期・ページ数の目安が分かるとスムーズです。
+        </p>
+        <p style="margin:0">
+          連絡先：<a href="mailto:yourname@example.com" style="color:white;text-decoration:underline;">yourname@example.com</a>
+        </p>
+        <p class="meta" style="margin:10px 0 0;">※ここは後でGoogleフォーム埋め込みに差し替えできます。</p>
+      </div>
+    </section>
+
+    <footer>
+      © <span id="y"></span> Portfolio
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById("y").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
