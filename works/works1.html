@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Urban Night Cinema | Portfolio Sample</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- 1. Variables & Reset --- */
+        :root {
+            --bg-color: #0b1c2c; /* 深いミッドナイトブルー */
+            --text-main: #f0e6d2; /* 生成り色（目に優しい白） */
+            --text-sub: #aab8c2;
+            --accent: #c5a059;   /* アンティークゴールド */
+            --font-serif: 'Cormorant Garamond', serif;
+            --font-sans: 'Noto Sans JP', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            line-height: 1.8;
+            overflow-x: hidden; /* 横スクロール防止 */
+        }
+
+        a { text-decoration: none; color: inherit; transition: opacity 0.3s; }
+        a:hover { opacity: 0.7; }
+        ul { list-style: none; }
+        img { width: 100%; height: auto; display: block; object-fit: cover; }
+
+        /* --- 2. Typography & Utilities --- */
+        .section-title {
+            font-family: var(--font-serif);
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--accent);
+            letter-spacing: 0.1em;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+        
+        /* タイトル下の装飾線 */
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 1px;
+            background-color: var(--accent);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* フェードインアニメーション用クラス */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1s ease, transform 1s ease;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- 3. Hero Section --- */
+        .hero {
+            height: 100vh;
+            width: 100%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        /* 背景画像とオーバーレイ */
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://images.unsplash.com/photo-1519758763566-b3334863f6c8?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+            filter: brightness(0.6); /* 画像を暗くする */
+        }
+
+        .hero-content h1 {
+            font-family: var(--font-serif);
+            font-size: clamp(3rem, 8vw, 6rem); /* レスポンシブフォントサイズ */
+            font-weight: 400;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            letter-spacing: 0.05em;
+        }
+
+        .hero-content p {
+            font-size: 1.1rem;
+            margin-bottom: 3rem;
+            color: var(--text-sub);
+            letter-spacing: 0.2em;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 40px;
+            border: 1px solid var(--text-main);
+            color: var(--text-main);
+            font-family: var(--font-serif);
+            font-size: 1.2rem;
+            letter-spacing: 0.1em;
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(5px);
+            transition: all 0.4s ease;
+        }
+
+        .btn:hover {
+            background: var(--text-main);
+            color: var(--bg-color);
+        }
+
+        /* --- 4. Concept Section --- */
+        .concept {
+            padding: 100px 0;
+            text-align: center;
+        }
+        .concept p {
+            max-width: 600px;
+            margin: 0 auto 40px;
+            font-size: 1rem;
+            line-height: 2.2;
+            text-align: justify; /* 両端揃えで文章を美しく */
+            text-align-last: center;
+        }
+        .concept-img {
+            max-width: 800px;
+            margin: 0 auto;
+            height: 400px;
+            overflow: hidden;
+        }
+        .concept-img img {
+            height: 100%;
+            object-position: center 30%;
+        }
+
+        /* --- 5. Experience (Grid) --- */
+        .experience {
+            padding: 80px 0;
+            background-color: rgba(255,255,255,0.02); /* 僅かに背景色を変える */
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+        .card figure {
+            height: 250px;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+        }
+        .card figure img {
+            transition: transform 0.6s ease;
+        }
+        .card:hover figure img {
+            transform: scale(1.05);
+        }
+        .card h3 {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--accent);
+        }
+        .card p {
+            font-size: 0.9rem;
+            color: var(--text-sub);
+        }
+
+        /* --- 6. Lineup --- */
+        .lineup {
+            padding: 100px 0;
+        }
+        .movie-item {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 60px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 40px;
+        }
+        @media (min-width: 768px) {
+            .movie-item {
+                flex-direction: row;
+                align-items: center;
+                gap: 50px;
+            }
+            .movie-thumb {
+                width: 40%;
+            }
+            .movie-info {
+                width: 60%;
+            }
+        }
+        .movie-thumb {
+            aspect-ratio: 16/9;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        .movie-date {
+            display: block;
+            font-family: var(--font-serif);
+            font-size: 1.2rem;
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+        .movie-title {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        /* --- 7. Information --- */
+        .information {
+            padding: 80px 0;
+            background-color: rgba(255,255,255,0.02);
+        }
+        .info-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 40px;
+        }
+        .info-table th, .info-table td {
+            padding: 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            text-align: left;
+        }
+        .info-table th {
+            width: 30%;
+            font-family: var(--font-serif);
+            color: var(--accent);
+            font-weight: 400;
+        }
+
+        /* --- 8. Footer --- */
+        footer {
+            padding: 60px 0;
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--text-sub);
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        .footer-logo {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            display: block;
+            color: var(--text-main);
+        }
+
+    </style>
+</head>
+<body>
+
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-content fade-in">
+            <h1>Starry Night,<br>Cinema Light.</h1>
+            <p>202X.10.14 - 10.15<br>At Shibuya Sky Garden</p>
+            <a href="#ticket" class="btn">RESERVE</a>
+        </div>
+    </section>
+
+    <section class="concept container fade-in">
+        <h2 class="section-title">CONCEPT</h2>
+        <p>
+            いつもの街が、一夜限りの劇場になる。<br>
+            「Urban Night Cinema」は、都市の喧騒を離れ、五感で映画を楽しむ野外シアターイベントです。<br>
+            こだわりのクラフトビールと、特別な音響体験。<br>
+            スクリーンに映し出されるのは、あの頃の名作。<br>
+            大切な人と語らうもよし、一人で物語に没入するもよし。<br>
+            贅沢な「余白」の時間をお届けします。
+        </p>
+        <div class="concept-img">
+            <img src="https://images.unsplash.com/photo-1517604931442-7105376f2bd1?q=80&w=2070&auto=format&fit=crop" alt="乾杯するシーン">
+        </div>
+    </section>
+
+    <section class="experience">
+        <div class="container">
+            <h2 class="section-title fade-in">EXPERIENCE</h2>
+            <div class="grid-container">
+                <div class="card fade-in">
+                    <figure>
+                        <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=2070&auto=format&fit=crop" alt="Headphones">
+                    </figure>
+                    <h3>Silent Theater</h3>
+                    <p>専用のワイヤレスヘッドフォンを使用。周囲の音を遮断し、映画の音響だけに包まれる没入体験を。</p>
+                </div>
+                <div class="card fade-in">
+                    <figure>
+                        <img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?q=80&w=1980&auto=format&fit=crop" alt="Food">
+                    </figure>
+                    <h3>Night Picnic</h3>
+                    <p>予約限定のピクニックBOXをご用意。地元の人気ベーカリーとコラボした、特別なディナーを。</p>
+                </div>
+                <div class="card fade-in">
+                    <figure>
+                        <img src="https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?q=80&w=2070&auto=format&fit=crop" alt="Camping">
+                    </figure>
+                    <h3>Glamping Space</h3>
+                    <p>芝生エリアには、リラックスできる特別シートを完備。靴を脱いで、自宅のようにくつろいで。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="lineup container">
+        <h2 class="section-title fade-in">MOVIE LINEUP</h2>
+        
+        <div class="movie-item fade-in">
+            <div class="movie-thumb">
+                <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=2059&auto=format&fit=crop" alt="Movie A">
+            </div>
+            <div class="movie-info">
+                <span class="movie-date">Day 1 : 10.14 (Sat)</span>
+                <h3 class="movie-title">『ミッドナイト・イン・パリ (仮)』</h3>
+                <p>18:30 Open / 19:30 Start</p>
+                <p style="font-size: 0.9rem; color: #aaa; margin-top:10px;">パリの街並みを美しく描いた名作。幻想的な夜の雰囲気に浸るひとときを。</p>
+            </div>
+        </div>
+
+        <div class="movie-item fade-in">
+            <div class="movie-thumb">
+                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=2070&auto=format&fit=crop" alt="Movie B">
+            </div>
+            <div class="movie-info">
+                <span class="movie-date">Day 2 : 10.15 (Sun)</span>
+                <h3 class="movie-title">『LIFE! (仮)』</h3>
+                <p>18:30 Open / 19:30 Start</p>
+                <p style="font-size: 0.9rem; color: #aaa; margin-top:10px;">一歩踏み出す勇気をくれる冒険譚。壮大な風景美を大スクリーンで。</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="information">
+        <div class="container fade-in">
+            <h2 class="section-title">INFORMATION</h2>
+            <table class="info-table">
+                <tr>
+                    <th>Event Name</th>
+                    <td>Urban Night Cinema 202X</td>
+                </tr>
+                <tr>
+                    <th>Date</th>
+                    <td>202X年10月14日(土) - 15日(日) ※雨天中止</td>
+                </tr>
+                <tr>
+                    <th>Place</th>
+                    <td>渋谷スカイガーデン 特設エリア</td>
+                </tr>
+                <tr>
+                    <th>Ticket</th>
+                    <td>一般: ¥3,500 / ピクニックBOX付: ¥5,500</td>
+                </tr>
+            </table>
+            
+            <div style="width: 100%; height: 300px; background-color: #222; display: flex; align-items: center; justify-content: center; color: #555;">
+                [ Google Map Area ]
+            </div>
+            
+            <div style="text-align: center; margin-top: 50px;">
+                <a href="#" class="btn" id="ticket">BOOK YOUR SEAT</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <span class="footer-logo">Urban Night Cinema</span>
+        <p>&copy; Urban Night Cinema Committee. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Intersection Observerを使って、要素が画面に入ったら'visible'クラスをつける
+        document.addEventListener("DOMContentLoaded", function() {
+            const observerOptions = {
+                root: null, // ビューポートをルートとする
+                rootMargin: "0px",
+                threshold: 0.1 // 10%見えたら発火
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("visible");
+                        observer.unobserve(entry.target); // 一度表示されたら監視を終了
+                    }
+                });
+            }, observerOptions);
+
+            // .fade-in クラスを持つすべての要素を監視
+            const fadeElements = document.querySelectorAll(".fade-in");
+            fadeElements.forEach(el => observer.observe(el));
+        });
+    </script>
+</body>
+</html>
